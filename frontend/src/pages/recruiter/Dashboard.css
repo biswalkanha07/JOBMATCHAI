@@ -1,0 +1,27 @@
+@import '../student/Dashboard.css';
+
+.recruiter-grid {
+  grid-template-columns: 1fr;
+}
+
+.text-warning {
+  color: var(--warning);
+}
+
+.text-success {
+  color: var(--success);
+}
+
+.text-danger {
+  color: var(--danger);
+}
+
+.status-published {
+  background-color: rgba(16, 185, 129, 0.1);
+  color: #059669;
+}
+
+.status-draft {
+  background-color: rgba(107, 114, 128, 0.1);
+  color: #4b5563;
+}
