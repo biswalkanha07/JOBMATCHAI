@@ -14,4 +14,4 @@ python-multipart
 pgvector
 sentence-transformers
 email-validator
-pwdlib
+pwdlib[argon2]
