@@ -1,6 +1,6 @@
 import { apiClient } from './client';
 import type { StudentProfile } from './student';
-import type { MatchResult } from './jobs';
+import type { MatchResult, Job } from './jobs';
 
 export interface RecruiterApplication {
   id: number;
@@ -10,6 +10,7 @@ export interface RecruiterApplication {
   applied_at: string;
   student?: StudentProfile;
   match_result?: MatchResult;
+  job?: Job;
 }
 
 export interface Company {
@@ -36,28 +37,28 @@ export interface RecruiterProfile {
 
 export const recruiterApi = {
   getJobApplications: async (jobId: number | 'all') => {
-    const url = jobId === 'all' 
+    const url = jobId === 'all'
       ? '/recruiter/jobs/all/applications'
       : `/recruiter/jobs/${jobId}/applications`;
     const response = await apiClient.get<RecruiterApplication[]>(url);
     return response.data;
   },
-  
+
   updateApplicationStatus: async (jobId: number, appId: number, status: string) => {
     const response = await apiClient.patch<RecruiterApplication>(`/recruiter/jobs/${jobId}/applications/${appId}/status`, { status });
     return response.data;
   },
-  
+
   getProfile: async () => {
     const response = await apiClient.get<RecruiterProfile>('/recruiters/me/profile');
     return response.data;
   },
-  
+
   updateProfile: async (data: Partial<RecruiterProfile>) => {
     const response = await apiClient.put<RecruiterProfile>('/recruiters/me/profile', data);
     return response.data;
   },
-  
+
   updateCompany: async (data: Partial<Company>) => {
     const response = await apiClient.put<Company>('/recruiters/me/company', data);
     return response.data;
@@ -67,7 +68,7 @@ export const recruiterApi = {
     const response = await apiClient.get(`/recruiter/jobs/resume/${resumeId}/download`, {
       responseType: 'blob'
     });
-    
+
     // Create download link
     const url = window.URL.createObjectURL(new Blob([response.data]));
     const link = document.createElement('a');
@@ -83,7 +84,7 @@ export const recruiterApi = {
     const response = await apiClient.get(`/recruiter/jobs/resume/${resumeId}/download`, {
       responseType: 'blob'
     });
-    
+
     const blob = new Blob([response.data], { type: 'application/pdf' });
     const url = window.URL.createObjectURL(blob);
     window.open(url, '_blank');

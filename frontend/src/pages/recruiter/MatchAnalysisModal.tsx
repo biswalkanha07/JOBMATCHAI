@@ -1,6 +1,5 @@
 import React from 'react';
 import type { ExplainabilityData, MatchResult } from '../../api/jobs';
-import { Card } from '../../components/Card';
 import './MatchProfiles.css'; // Reuse styles or add new ones
 
 interface MatchAnalysisModalProps {
@@ -56,7 +55,7 @@ export const MatchAnalysisModal: React.FC<MatchAnalysisModalProps> = ({ matchRes
   return (
     <div className="modal-overlay" onClick={onClose}>
       <div className="modal-content" onClick={e => e.stopPropagation()} style={{ maxWidth: '800px', width: '90%', maxHeight: '90vh', overflowY: 'auto', padding: '0' }}>
-        
+
         {/* Header Section */}
         <div style={{ padding: '2rem', borderBottom: '1px solid var(--border)', background: 'var(--bg-card)' }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
@@ -114,7 +113,7 @@ export const MatchAnalysisModal: React.FC<MatchAnalysisModalProps> = ({ matchRes
 
         {/* Detailed Requirements */}
         <div style={{ padding: '2rem' }}>
-          
+
           {matched_requirements.length > 0 && (
             <div style={{ marginBottom: '2rem' }}>
               <h3 style={{ color: 'var(--success)', borderBottom: '2px solid var(--success)', paddingBottom: '0.5rem', marginBottom: '1rem' }}>
@@ -150,7 +149,7 @@ export const MatchAnalysisModal: React.FC<MatchAnalysisModalProps> = ({ matchRes
               {not_available_requirements.map(req => renderRequirement(req, 'ℹ️', 'var(--text-light)'))}
             </div>
           )}
-          
+
         </div>
 
       </div>
