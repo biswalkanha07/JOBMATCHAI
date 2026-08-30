@@ -1,1139 +1,1231 @@
-# JOBMATCH AI — PRODUCTION-QUALITY README
+# 🚀 JobMatch AI
 
-Create a professional, production-quality root-level `README.md` for the JobMatch AI project.
+> **AI-powered job matching platform that intelligently connects students with relevant job opportunities and helps recruiters identify the most suitable candidates.**
 
-The README must be written like documentation for a serious SaaS product / software engineering project.
+<p align="center">
+  <img src="https://img.shields.io/badge/AI-Job%20Matching-7C3AED?style=for-the-badge" alt="AI Job Matching">
+  <img src="https://img.shields.io/badge/Python-FastAPI-009688?style=for-the-badge&logo=fastapi&logoColor=white" alt="FastAPI">
+  <img src="https://img.shields.io/badge/React-Vite-61DAFB?style=for-the-badge&logo=react&logoColor=black" alt="React">
+  <img src="https://img.shields.io/badge/PostgreSQL-Database-336791?style=for-the-badge&logo=postgresql&logoColor=white" alt="PostgreSQL">
+  <img src="https://img.shields.io/badge/pgvector-Semantic%20Search-FF6B35?style=for-the-badge" alt="pgvector">
+</p>
 
-DO NOT invent functionality that does not currently exist.
+<p align="center">
+  <img src="https://img.shields.io/badge/SentenceTransformers-Semantic%20AI-FFB000?style=flat-square" alt="Sentence Transformers">
+  <img src="https://img.shields.io/badge/Testing-Pytest-0A9EDC?style=flat-square&logo=pytest&logoColor=white" alt="Pytest">
+  <img src="https://img.shields.io/badge/Frontend-TypeScript-3178C6?style=flat-square&logo=typescript&logoColor=white" alt="TypeScript">
+  <img src="https://img.shields.io/badge/Status-Production%20Ready-22C55E?style=flat-square" alt="Status">
+</p>
 
-Clearly distinguish:
+---
 
-IMPLEMENTED
-INTEGRATION IN PROGRESS
-PLANNED / FUTURE
+## 📌 Overview
 
-The project is currently:
+**JobMatch AI** is a full-stack AI-powered recruitment and job-matching platform designed to connect students/job seekers with relevant opportunities while giving recruiters intelligent candidate insights.
 
-React + Vite frontend
-FastAPI backend
-PostgreSQL database
-SQLAlchemy ORM
-Alembic migrations
-JWT authentication
-Argon2 password hashing
-Multi-tenant recruiter architecture
-Student global job discovery
-Recruiter tenant-isolated workspaces
+The platform analyzes candidate profiles and job requirements using a combination of:
 
-ML / AI recommendation functionality is intentionally DEFERRED to a later phase.
+* 🧠 Semantic similarity
+* 🎯 Deterministic profile matching
+* 🛠️ Skill comparison
+* 🎓 Education matching
+* 💼 Experience matching
+* 📁 Project relevance
+* 📍 Location matching
+* 🏢 Work-mode compatibility
+* 💰 Salary compatibility
+* ✅ Eligibility checks
 
-==================================================
-1. README DESIGN
-==================================================
+The result is a transparent and explainable **0–100% job/candidate match score**.
 
-Create a visually polished Markdown README.
+---
 
-Use:
+# ✨ Key Features
 
-- clear headings
-- emoji section markers where useful
-- tables
-- badges where appropriate
-- code blocks
-- architecture diagrams using Mermaid where useful
-- clean spacing
-- concise professional writing
-- developer-friendly commands
+## 👨‍🎓 Student Features
 
-Do not overuse emojis.
+### 🔐 Authentication
 
-The README should look like documentation for a real production SaaS platform.
+* Student registration
+* Secure login
+* Authentication and authorization
+* Protected student routes
 
-Recommended badge section:
+### 👤 Profile Management
 
-- React
-- Vite
-- TypeScript
-- FastAPI
-- Python
-- PostgreSQL
-- SQLAlchemy
-- Alembic
-- JWT
-- License
+Students can maintain:
 
-Only add badges that accurately represent technologies actually used.
+* Personal information
+* Education
+* Skills
+* Experience
+* Projects
+* Preferred job roles
+* Preferred locations
+* Work-mode preferences
+* Salary expectations
+
+### 🧠 AI Profile Analysis
 
-Do not add fake build/coverage/deployment badges.
+The system analyzes the student's profile and creates a structured representation used by the recommendation engine.
 
-==================================================
-2. PROJECT TITLE
-==================================================
+### 🎯 Personalized Job Recommendations
 
-Start with:
+Jobs are dynamically ranked according to the student's profile.
 
-# JobMatch AI
+Example:
 
-Then include a short professional description.
-
-Example concept:
-
-> JobMatch AI is a multi-tenant job discovery and recruitment platform connecting students with recruiters through a centralized job marketplace, secure recruiter workspaces, profile-based matching infrastructure, and future AI-powered recommendations.
-
-Explain that the platform has two primary roles:
-
-STUDENT
-RECRUITER
-
-==================================================
-3. PRODUCT OVERVIEW
-==================================================
-
-Explain the product clearly.
-
-Student experience:
-
-Landing Page
-→ Browse published jobs
-→ Register/Login
-→ Student Dashboard
-→ Profile
-→ Jobs
-→ Applications
-→ Future personalized recommendations
-
-Recruiter experience:
-
-Register
-→ Automatic workspace/tenant creation
-→ Login
-→ Recruiter Dashboard
-→ Company/Workspace
-→ Create Jobs
-→ Manage Jobs
-→ View Applications
-→ Candidate Management
-→ Future AI matching
-
-==================================================
-4. CORE PRODUCT PRINCIPLES
-==================================================
-
-Document these principles:
-
-### Global Student Marketplace
-
-Students and public visitors can discover published jobs created by recruiters across all tenants.
-
-### Multi-Tenant Recruiter Workspaces
-
-Every recruiter operates inside a separate tenant/workspace.
-
-Recruiter A:
-
-Tenant A
-→ Jobs A
-→ Applications A
-→ Candidates A
-
-Recruiter B:
-
-Tenant B
-→ Jobs B
-→ Applications B
-→ Candidates B
-
-Tenant A must never access Tenant B's private recruiter data.
-
-### Backend-First Security
-
-The frontend must never be considered the final security boundary.
-
-FastAPI performs:
-
-JWT authentication
-Role authorization
-Tenant authorization
-Ownership validation
-
-==================================================
-5. ARCHITECTURE DIAGRAM
-==================================================
-
-Add a Mermaid architecture diagram.
-
-Conceptually:
-
-React + Vite
-        |
-        v
-API Client
-        |
-        v
-FastAPI
-        |
-        +---- JWT Authentication
-        |
-        +---- Role Authorization
-        |
-        +---- Tenant Authorization
-        |
-        v
-SQLAlchemy
-        |
-        v
-PostgreSQL
-
-Make the diagram readable.
-
-==================================================
-6. MULTI-TENANT ARCHITECTURE
-==================================================
-
-Explain the tenancy model in detail.
-
-Conceptual model:
-
-User
-├── StudentProfile
-│
-└── RecruiterProfile
-        │
-        └── Tenant / Workspace
-                ├── Company
-                ├── Jobs
-                ├── Applications
-                └── MatchResults
-
-Explain:
-
-Students are global users.
-
-Students do not belong to recruiter tenants.
-
-Recruiters belong to exactly the appropriate tenant/workspace.
-
-Recruiter-owned resources are tenant-scoped.
-
-Never trust tenant_id from frontend requests.
-
-The backend derives tenant context from the authenticated recruiter.
-
-==================================================
-7. JOB VISIBILITY MODEL
-==================================================
-
-Document:
-
-PUBLIC:
-
-PUBLISHED jobs
-→ visible across all tenants
-
-DRAFT jobs
-→ private to owning tenant
-
-CLOSED jobs
-→ not publicly discoverable
-
-Conceptual flow:
-
-Recruiter
-→ Tenant
-→ Job
-→ PUBLISHED
-→ Global Student/Public Marketplace
-
-==================================================
-8. RECOMMENDATION SYSTEM
-==================================================
-
-This section is extremely important.
-
-Clearly state:
-
-THE AI/ML RECOMMENDATION ENGINE IS NOT IMPLEMENTED YET.
-
-It is planned for a future phase.
-
-Do not claim current AI functionality.
-
-Explain the planned architecture.
-
-Future recommendation pipeline:
-
+```text
+┌─────────────────────────────────────┐
+│ AI Engineer                         │
+│                                     │
+│        ⭐ 92% MATCH                 │
+│                                     │
+│ ✓ Python                            │
+│ ✓ Machine Learning                  │
+│ ✓ SQL                               │
+│ ⚠ TensorFlow                       │
+│ ⚠ Deep Learning                     │
+│                                     │
+│ [ View Details ]                    │
+└─────────────────────────────────────┘
+```
+
+### 📊 Explainable Matching
+
+Instead of showing only a percentage, JobMatch AI explains **why** a job matches.
+
+Example:
+
+```text
+92% Profile Match
+
+✓ Strong Python match
+✓ Machine Learning experience
+✓ Relevant ML project
+✓ Preferred role match
+✓ Location compatible
+✓ Work mode compatible
+
+⚠ TensorFlow missing
+⚠ Deep Learning missing
+```
+
+### 🔎 Complete Job Details
+
+Students can see recruiter-provided job information including:
+
+* Job title
+* Company
+* Department
+* Description
+* Responsibilities
+* Required skills
+* Preferred skills
+* Education requirements
+* Experience range
+* Salary range
+* Location
+* Work mode
+* Employment type
+* Other available job information
+
+### 📝 Job Applications
+
+Students can:
+
+* Apply for jobs
+* View applications
+* Track application status
+* Save jobs where supported
+
+---
+
+# 🧑‍💼 Recruiter Features
+
+## 🏢 Job Creation
+
+Recruiters can create jobs with detailed requirements:
+
+```text
+Job Title
+Department
+Description
+Responsibilities
+Required Skills
+Preferred Skills
+Education
+Minimum Experience
+Maximum Experience
+Minimum Salary
+Maximum Salary
+Location
+Work Mode
+Employment Type
+```
+
+## 👥 Applicant Management
+
+Recruiters can view applicants for each job.
+
+Example:
+
+```text
+AI Engineer
+
+Applicants: 12
+
+┌──────────────────────────────────┐
+│ Pritam                           │
+│                                  │
+│ ⭐ 92% Profile Match             │
+│                                  │
+│ ✓ Python                         │
+│ ✓ Machine Learning               │
+│ ✓ SQL                            │
+│ ⚠ TensorFlow                    │
+│                                  │
+│ ✓ Eligible                       │
+│                                  │
+│ [ View Profile ]                 │
+└──────────────────────────────────┘
+```
+
+## 📈 Candidate Match Analysis
+
+Recruiters can see:
+
+* Overall match percentage
+* Semantic match
+* Skills match
+* Experience match
+* Education match
+* Project relevance
+* Location compatibility
+* Work-mode compatibility
+* Salary compatibility
+* Matched skills
+* Missing skills
+* Eligibility
+
+---
+
+# 📸 Application Match Snapshot
+
+One of the key features of JobMatch AI is the **application-time match snapshot**.
+
+When a student applies:
+
+```text
 Student Profile
-├── Skills
-├── Education
-├── Experience
-├── Projects
-├── Preferences
-└── Resume
+      +
+Specific Job
+      ↓
+Matching Engine
+      ↓
+Match Calculation
+      ↓
+Snapshot Saved
+      ↓
+Application
+```
 
-            +
+For example:
 
-Job
-├── Title
-├── Description
-├── Requirements
-├── Skills
-├── Education requirements
-├── Experience requirements
-└── Preferences
+```text
+Pritam applies for AI Engineer
 
-            ↓
+Application Match:
+92%
+```
 
-Future Recommendation Engine
+If the student later changes their profile, the recruiter can still see the **original application-time match**.
 
-            ↓
+This preserves historical recruitment context.
 
-Candidate/Job Feature Extraction
+---
 
-            ↓
+# 🧠 Recommendation Engine
 
-Skill Matching
+JobMatch AI uses a hybrid recommendation architecture.
 
-            ↓
+```text
+                 STUDENT PROFILE
+                       │
+                       ▼
+              PROFILE ANALYSIS
+                       │
+                       ▼
+              PROFILE NORMALIZATION
+                       │
+                       ▼
+               ELIGIBILITY CHECK
+                       │
+                       ▼
+                  JOB DATA
+                       │
+             ┌─────────┴─────────┐
+             ▼                   ▼
+      Semantic Matching    Deterministic Matching
+             │                   │
+             ▼                   ▼
+         pgvector          Structured Rules
+             │                   │
+             └─────────┬─────────┘
+                       ▼
+                 MATCH SCORE
+                       │
+                       ▼
+             EXPLANATION + INSIGHTS
+                       │
+                       ▼
+                RANKED RESULTS
+```
 
-Semantic Similarity
+---
 
-            ↓
+# 📊 Match Scoring
 
-Weighted Ranking
+The current scoring architecture combines semantic and deterministic signals.
 
-            ↓
+| Component           |   Weight |
+| ------------------- | -------: |
+| 🧠 Semantic Match   |  **25%** |
+| 🛠️ Skills Match    |  **30%** |
+| 💼 Experience Match |  **15%** |
+| 🎓 Education Match  |  **10%** |
+| 📍 Location Match   |  **10%** |
+| 🏢 Work Mode Match  |   **5%** |
+| 💰 Salary Match     |   **5%** |
+| **Total**           | **100%** |
 
-MatchResult
+> The scoring weights are centralized and configurable.
 
-            ↓
+---
 
-Student Recommendations
-+
-Recruiter Candidate Matching
+# 🧩 Skill Matching
 
-Explain that future implementation may include techniques such as:
+JobMatch AI normalizes common skill variations.
 
-- skill matching
-- keyword matching
-- TF-IDF
-- cosine similarity
-- semantic embeddings
-- weighted scoring
-- explainability
+For example:
 
-But explicitly mark all of these as FUTURE.
+```text
+ML
+Machine Learning
+machine-learning
+MachineLearning
+```
 
-Do not say they are currently implemented.
+can be normalized into the same skill concept where appropriate.
 
-==================================================
-9. RECOMMENDATION SYSTEM — FUTURE WORKFLOW
-==================================================
+Similarly:
 
-Explain the planned student recommendation flow:
+```text
+JS
+JavaScript
+Javascript
+```
 
-Student updates profile
-        ↓
-Profile becomes structured
-        ↓
-Published jobs collected
-        ↓
-Job requirements normalized
-        ↓
-Matching engine evaluates profile/job
-        ↓
-Score generated
-        ↓
-Reasons generated
-        ↓
-Jobs ranked
-        ↓
-Recommended Jobs displayed
+are normalized consistently.
 
-Recruiter matching:
+The system avoids unsafe equivalences such as:
 
-Recruiter creates Job
-        ↓
-Job published
-        ↓
-Candidate profiles evaluated
-        ↓
-Future matching engine
-        ↓
-Candidate ranking
-        ↓
-Match explanations
-        ↓
-Recruiter Match Profiles
+```text
+Java ≠ JavaScript
+```
 
-Again clearly mark this as FUTURE.
+---
 
-==================================================
-10. CURRENT FUNCTIONALITY
-==================================================
+# 🎯 Eligibility Engine
 
-Create a table:
+Eligibility is evaluated separately from recommendation scoring.
 
-| Feature | Status |
-|---|---|
-| React/Vite frontend | Implemented |
-| Student UI | Implemented |
-| Recruiter UI | Implemented |
-| FastAPI backend | Implemented |
-| PostgreSQL | Implemented |
-| SQLAlchemy | Implemented |
-| Alembic | Implemented |
-| JWT authentication | Implemented |
-| Password hashing | Implemented |
-| Multi-tenancy | Implemented |
-| Tenant isolation | Implemented |
-| Public published jobs | Implemented |
-| Student registration | Implemented |
-| Recruiter registration | Implemented |
-| Login | Implemented |
-| Frontend/backend integration | In Progress |
-| Applications | Integration/implementation status must be verified |
-| Resume parsing | Future |
-| AI recommendations | Future |
-| ML matching | Future |
+Example:
 
-IMPORTANT:
-Before writing statuses for specific application/profile APIs, inspect the actual repository and mark them according to the real implementation.
+```text
+Student:
+Fresher
 
-Do not blindly claim completion.
+Job:
+0–2 Years
 
-==================================================
-11. TECH STACK
-==================================================
+Result:
+✅ Eligible
+```
 
-Document the actual technologies.
+But:
 
-Frontend:
+```text
+Student:
+Fresher
 
-React
-Vite
-TypeScript
-Axios or actual HTTP client
-React Router if actually used
-existing UI/component libraries if actually used
+Job:
+5+ Years Required
 
-Backend:
+Result:
+❌ Not Eligible
+```
 
-Python
-FastAPI
-Uvicorn
-SQLAlchemy
-Pydantic
-Pydantic Settings
-Alembic
-PostgreSQL
-JWT
-pwdlib / Argon2
+This prevents a candidate from receiving a misleading high recommendation simply because they possess some matching skills.
 
-Testing:
+---
 
-Pytest
-HTTPX
+# 🔍 Matched & Missing Skills
 
-Only list dependencies actually present in the project.
+For each recommendation/application, the system can identify:
 
-==================================================
-12. PROJECT STRUCTURE
-==================================================
+### Matched
 
-Inspect the actual repository and document the real structure.
+```text
+✓ Python
+✓ Machine Learning
+✓ SQL
+✓ Scikit-learn
+```
 
-Conceptual structure:
+### Missing
 
-JobMatch/
+```text
+⚠ TensorFlow
+⚠ Deep Learning
+```
+
+This makes the recommendation actionable for students and useful for recruiters.
+
+---
+
+# 🛠️ Technology Stack
+
+## Frontend
+
+* React
+* TypeScript
+* Vite
+* Modern component-based UI
+* Responsive design
+
+## Backend
+
+* Python
+* FastAPI
+* SQLAlchemy
+* Pydantic
+* Alembic
+
+## Database
+
+* PostgreSQL
+* pgvector
+
+## AI / ML
+
+* SentenceTransformers
+* `all-MiniLM-L6-v2`
+* Vector embeddings
+* Cosine similarity
+* Hybrid semantic + deterministic matching
+
+## Testing
+
+* Pytest
+* Frontend test tooling
+* API testing
+* Build validation
+* E2E validation where configured
+
+---
+
+# 📁 Project Structure
+
+> The exact structure may vary depending on the current implementation.
+
+```text
+JobmatchAi/
 │
-├── Frontend/
-│   ├── src/
-│   ├── public/
-│   ├── package.json
-│   └── ...
-│
-├── Backend/
+├── backend/
 │   ├── app/
+│   │   ├── models/
+│   │   │   ├── job.py
+│   │   │   ├── user.py
+│   │   │   └── ...
+│   │   │
+│   │   ├── schemas/
+│   │   │   └── core.py
+│   │   │
+│   │   ├── services/
+│   │   │   └── matching_service.py
+│   │   │
+│   │   ├── api/
+│   │   │   └── ...
+│   │   │
+│   │   └── main.py
+│   │
 │   ├── alembic/
 │   ├── tests/
-│   ├── scripts/
 │   ├── requirements.txt
-│   ├── alembic.ini
-│   ├── .env.example
-│   └── ...
+│   └── .env
 │
-└── README.md
-
-Do NOT fabricate directories.
-
-Inspect the actual repository and adjust this section to match reality.
-
-==================================================
-13. DATABASE MODELS
-==================================================
-
-Document the actual database entities.
-
-Known conceptual entities:
-
-users
-student_profiles
-recruiter_profiles
-tenants
-companies
-education
-experience
-projects
-resumes
-skills
-student_skills
-project_skills
-jobs
-job_skills
-applications
-match_results
-
-Explain relationships at a high level.
-
-Do not expose implementation secrets.
-
-==================================================
-14. AUTHENTICATION
-==================================================
-
-Document:
-
-Student Registration
-Recruiter Registration
-Login
-JWT
-/auth/me
-Logout behavior
-
-Explain:
-
-Passwords are hashed.
-
-Passwords are never stored in plaintext.
-
-JWT contains authenticated identity/role context.
-
-Protected APIs require:
-
-Authorization: Bearer <token>
-
-Explain that backend authorization remains authoritative.
-
-==================================================
-15. API DOCUMENTATION
-==================================================
-
-Document:
-
-Local API:
-
-http://127.0.0.1:8000
-
-Swagger:
-
-http://127.0.0.1:8000/docs
-
-OpenAPI:
-
-http://127.0.0.1:8000/api/v1/openapi.json
-
-List actual implemented API endpoints by inspecting the FastAPI routers.
-
-At minimum, verify before documenting:
-
-GET /api/v1/health
-GET /api/v1/health/db
-POST /api/v1/auth/register/student
-POST /api/v1/auth/register/recruiter
-POST /api/v1/auth/login
-GET /api/v1/auth/me
-GET /api/v1/public/jobs/
-GET /api/v1/students/me/profile
-POST /api/v1/recruiter/jobs/
-GET /api/v1/recruiter/jobs/
-GET /api/v1/recruiter/jobs/{job_id}
-
-If additional endpoints exist, document them.
-
-Do not document endpoints that do not actually exist.
-
-==================================================
-16. PREREQUISITES
-==================================================
-
-Document required software.
-
-Examples:
-
-Node.js
-npm
-Python
-PostgreSQL
-Git
-
-Specify versions based on the actual project/package files where possible.
-
-==================================================
-17. INSTALLATION
-==================================================
-
-Provide complete installation instructions from a fresh clone.
-
-Example:
-
-git clone <repository-url>
-cd JobMatch
-
-Then frontend installation.
-
-Then backend installation.
-
-Do not invent repository URLs.
-
-Use placeholders where the repository URL is unknown.
-
-==================================================
-18. POSTGRESQL SETUP
-==================================================
-
-Explain how to create:
-
-database:
-
-jobmatch
-
-Explain that the user needs:
-
-host
-port
-database
-username
-password
-
-Do not include real credentials.
-
-Example:
-
-Host:
-127.0.0.1
-
-Port:
-5432
-
-Database:
-jobmatch
-
-User:
-postgres
-
-Password:
-<your-password>
-
-==================================================
-19. BACKEND ENVIRONMENT
-==================================================
-
-Document:
-
-Backend/.env
-
-Use placeholders:
-
-DB_HOST=127.0.0.1
-DB_PORT=5432
-DB_NAME=jobmatch
-DB_USER=postgres
-DB_PASSWORD=your_password
-
-DATABASE_URL=postgresql+psycopg2://postgres:password@127.0.0.1:5432/jobmatch
-
-SECRET_KEY=your-secret-key
-JWT_ALGORITHM=HS256
-ACCESS_TOKEN_EXPIRE_MINUTES=10080
-
-Explain that:
-
-`.env`
-
-must never be committed.
-
-`.env.example`
-
-contains placeholders only.
-
-Never put real credentials into README.
-
-==================================================
-20. FRONTEND ENVIRONMENT
-==================================================
-
-Document the Vite frontend environment variable.
-
-Example:
-
-VITE_API_BASE_URL=http://127.0.0.1:8000/api/v1
-
-Explain:
-
-Frontend environment variables must never contain:
-
-DATABASE_URL
-DB_PASSWORD
-SECRET_KEY
-
-Only public client configuration belongs in Vite environment variables.
-
-==================================================
-21. DATABASE MIGRATIONS
-==================================================
-
-Document:
-
-Activate virtual environment.
-
-Then:
-
-alembic upgrade head
+├── frontend/
+│   ├── src/
+│   │   ├── api/
+│   │   ├── components/
+│   │   ├── pages/
+│   │   │   ├── student/
+│   │   │   └── recruiter/
+│   │   └── ...
+│   │
+│   ├── package.json
+│   ├── vite.config.ts
+│   └── .env
+│
+├── README.md
+└── .gitignore
+```
+
+---
+
+# ⚙️ Installation
+
+## 1️⃣ Prerequisites
+
+Install the following:
+
+| Software   | Recommended                     |
+| ---------- | ------------------------------- |
+| Python     | 3.11+                           |
+| Node.js    | 18+                             |
+| npm        | 9+                              |
+| PostgreSQL | 14+                             |
+| Git        | Latest                          |
+| pgvector   | Compatible PostgreSQL extension |
 
 Verify:
 
-alembic current
+```bash
+python --version
+node --version
+npm --version
+psql --version
+git --version
+```
 
-and:
+---
 
-alembic history
+# 📥 Clone Repository
 
-Explain that schema changes must use Alembic migrations.
+```bash
+git clone https://github.com/6Pritam/JobmatchAi.git
+cd JobmatchAi
+```
 
-Do not recommend manual database schema modification.
+> Replace the repository URL if your repository location is different.
 
-==================================================
-22. SEED DATA
-==================================================
+---
 
-Inspect the actual seed script.
+# 🐍 Backend Setup
 
-Document the correct command if it exists:
+Navigate to the backend directory:
 
-python scripts/seed.py
+```bash
+cd backend
+```
 
-Explain what development seed data creates based on the actual implementation.
+## Create Virtual Environment
 
-Do not claim quantities unless verified.
+### Windows
 
-==================================================
-23. RUNNING BACKEND
-==================================================
+```bash
+python -m venv venv
+venv\Scripts\activate
+```
 
-Document:
+### macOS / Linux
 
-cd Backend
+```bash
+python3 -m venv venv
+source venv/bin/activate
+```
 
-activate environment
+---
 
-uvicorn app.main:app --reload
+## Install Dependencies
 
-Expected:
+```bash
+pip install -r requirements.txt
+```
 
-http://127.0.0.1:8000
+---
 
-==================================================
-24. RUNNING FRONTEND
-==================================================
+# 🗄️ PostgreSQL Setup
 
-Document:
-
-cd Frontend
-
-npm install
-
-npm run dev
-
-Expected:
-
-http://localhost:5173
-
-Use actual package scripts from package.json.
-
-==================================================
-25. TESTING
-==================================================
-
-Document backend tests.
+Create a PostgreSQL database.
 
 Example:
 
-python -m pytest -v
+```sql
+CREATE DATABASE jobmatch_ai;
+```
 
-Explain important security tests:
+Enable pgvector:
 
-- JWT authentication
-- role protection
-- tenant isolation
-- public job visibility
-- student access control
+```sql
+CREATE EXTENSION IF NOT EXISTS vector;
+```
 
-Only report test counts after actually checking the repository.
+Verify:
 
-==================================================
-26. MANUAL VERIFICATION
-==================================================
+```sql
+SELECT extname FROM pg_extension;
+```
 
-Provide a simple testing checklist:
+You should see:
 
-### Health
+```text
+vector
+```
 
-GET /api/v1/health
+---
 
-### Database
+# 🔐 Environment Variables
 
-GET /api/v1/health/db
+Create a `.env` file in the backend directory.
 
-### Student
+Example:
 
-Register
-→ Login
-→ JWT
-→ /auth/me
+```env
+DATABASE_URL=postgresql://postgres:YOUR_PASSWORD@localhost:5432/jobmatch_ai
 
-### Recruiter
+SECRET_KEY=your-secret-key
 
-Register
-→ Tenant created
-→ Login
-→ Create Job
+ALGORITHM=HS256
 
-### Public
+ACCESS_TOKEN_EXPIRE_MINUTES=60
 
-Published jobs visible across tenants.
+CORS_ORIGINS=http://localhost:5173
+```
 
-### Tenant isolation
+> Never commit real passwords, secret keys, API keys, or production credentials.
 
-Recruiter A cannot access Recruiter B's jobs/applications/private data.
+Add `.env` to `.gitignore`.
 
-==================================================
-27. COMPLETE LOCAL DEVELOPMENT FLOW
-==================================================
+---
 
-Provide a clean step-by-step flow:
+# 🗃️ Database Migration
 
-1. Clone repository
-2. Create PostgreSQL database
-3. Configure Backend/.env
-4. Create Python virtual environment
-5. Install backend requirements
-6. Run Alembic migrations
-7. Seed development data if applicable
-8. Start FastAPI
-9. Configure frontend `.env.local`
-10. Install frontend dependencies
-11. Start Vite
-12. Open application
-13. Open Swagger
-14. Test authentication
-15. Test student flow
-16. Test recruiter flow
+If the project uses Alembic:
 
-==================================================
-28. SECURITY
-==================================================
+```bash
+alembic upgrade head
+```
 
-Document security principles.
+Check the migration state:
 
-Include:
+```bash
+alembic current
+```
 
-- Password hashing
-- JWT authentication
-- RBAC
-- Tenant isolation
-- Backend authorization
-- No credential exposure
-- No `.env` commits
-- Input validation
-- Database constraints
-- CORS configuration
+---
 
-Explain that frontend route protection is not a substitute for backend authorization.
+# 🚀 Start Backend
 
-==================================================
-29. DATA OWNERSHIP
-==================================================
+From the backend directory:
 
-Create a table:
+```bash
+uvicorn app.main:app --reload
+```
 
-| Data | Owner/Scope |
-|---|---|
-| Student profile | Student |
-| Student applications | Student |
-| Recruiter profile | Recruiter |
-| Tenant | Recruiter workspace |
-| Company | Tenant |
-| Jobs | Tenant |
-| Recruiter applications | Tenant's jobs |
-| Match results | Appropriate tenant/student/job scope |
+Backend:
 
-Adjust according to actual implementation.
-
-==================================================
-30. USER FLOWS
-==================================================
-
-Document both roles.
-
-### Student
-
-Public Landing
-→ Browse Jobs
-→ Register/Login
-→ Dashboard
-→ Profile
-→ Jobs
-→ Job Details
-→ Apply
-→ Applications
+```text
+http://localhost:8000
+```
 
-### Recruiter
-
-Register
-→ Workspace/Tenant
-→ Login
-→ Dashboard
-→ Create Job
-→ Publish
-→ Applications
-→ Candidate Management
-
-Clearly mark future AI recommendation/matching steps as future.
-
-==================================================
-31. ROADMAP
-==================================================
+Swagger API documentation:
 
-Create a professional roadmap.
+```text
+http://localhost:8000/docs
+```
 
-### Phase 1 — Product UI
-Completed
+ReDoc:
 
-### Phase 2 — Backend Foundation
-Completed
+```text
+http://localhost:8000/redoc
+```
 
-### Phase 3 — Multi-Tenant Security
-Completed
+---
 
-### Phase 4 — Frontend ↔ Backend Integration
-Current
+# ⚛️ Frontend Setup
 
-### Phase 5 — Resume Processing
-Future
+Open a new terminal.
 
-### Phase 6 — Recommendation Engine
-Future
+Navigate to:
 
-### Phase 7 — AI Matching & Explainability
-Future
+```bash
+cd frontend
+```
 
-### Phase 8 — Production Deployment
-Future
+Install dependencies:
 
-Only change statuses if repository evidence shows otherwise.
+```bash
+npm install
+```
 
-==================================================
-32. FUTURE AI ARCHITECTURE
-==================================================
+---
 
-Explain the intended future architecture without claiming it exists.
+# 🔐 Frontend Environment
 
-Potential future components:
+Create:
 
-Resume Parser
-Skill Extraction
-Job Parser
-Feature Engineering
-Matching Engine
-Ranking Engine
-Explainability Layer
+```text
+frontend/.env
+```
 
-Future flow:
+Example:
 
-Resume
- ↓
-Text Extraction
- ↓
-Structured Profile
- ↓
-Skill Extraction
+```env
+VITE_API_BASE_URL=http://localhost:8000
+```
 
-Job Description
- ↓
-Job Parsing
- ↓
-Structured Job
- ↓
-Required Skills
+Use the actual environment variable expected by the project if it differs.
 
-Profile + Job
- ↓
-Matching Engine
- ↓
-Match Score
- ↓
-Explanation
- ↓
-Recommendation
+---
 
-==================================================
-33. TROUBLESHOOTING
-==================================================
+# ▶️ Start Frontend
 
-Add common issues.
+```bash
+npm run dev
+```
 
-### PostgreSQL connection error
+The application will normally be available at:
 
-Check:
+```text
+http://localhost:5173
+```
 
-PostgreSQL service
-host
-port
-database
-username
-password
-DATABASE_URL
+---
 
-### DATABASE_URL missing
+# 🧪 Running Tests
 
-Check:
+## Backend
 
-Backend/.env
+From the backend directory:
 
-### Alembic interpolation error
+```bash
+pytest
+```
 
-Explain that special URL characters must be URL encoded and Alembic configuration must safely handle encoded URLs.
+Verbose:
 
-Do not recommend exposing credentials.
+```bash
+pytest -v
+```
 
-### CORS error
+Run a specific test:
 
-Check:
+```bash
+pytest tests/test_matching.py -v
+```
 
-FastAPI CORS configuration
-Frontend URL
-Vite development server
+---
 
-### 401 Unauthorized
+## Frontend
 
-Check:
+Check the available scripts:
 
-JWT
-Authorization header
-token expiration
-login state
+```bash
+npm run
+```
 
-### 403 Forbidden
+Then run the project's configured test command, for example:
 
-Check:
-
-user role
-tenant authorization
-
-### 404 for recruiter resource
-
-Explain this may intentionally mean the resource belongs to another tenant.
-
-==================================================
-34. DEVELOPMENT GUIDELINES
-==================================================
-
-Document:
-
-- Keep frontend/backend separation.
-- Use API service layer.
-- Avoid hardcoded business data.
-- Keep backend as source of truth.
-- Add migrations for schema changes.
-- Add tests for security-sensitive changes.
-- Never bypass tenant filtering.
-- Never trust tenant_id from client.
-- Do not expose secrets.
-- Keep ML logic separate from core CRUD/authentication.
-
-==================================================
-35. CONTRIBUTION GUIDELINES
-==================================================
-
-Provide a lightweight workflow:
-
-1. Create branch
-2. Implement feature
-3. Add/update tests
-4. Run backend tests
-5. Run frontend build
-6. Verify API
-7. Review security implications
-8. Submit PR
-
-Do not invent CI/CD systems that don't exist.
-
-==================================================
-36. LICENSE
-==================================================
-
-If no license currently exists:
-
-Do NOT invent one.
-
-Write:
-
-> License information will be added before public release.
+```bash
+npm test
+```
 
 or:
 
-> This project is currently private/development-stage.
+```bash
+npm run test
+```
 
-==================================================
-37. FINAL README REQUIREMENTS
-==================================================
+---
 
-The final README must:
+# 🔎 Code Quality
 
-- be complete
-- be professional
-- be technically accurate
-- be easy for a new developer to follow
-- contain no real passwords
-- contain no real SECRET_KEY
-- contain no JWT token
-- contain no personal credentials
-- not claim ML is implemented
-- not claim APIs exist if they don't
-- not fabricate test results
-- not fabricate deployment infrastructure
-- not fabricate repository URLs
+Run backend checks configured by the project.
 
-Before writing the final README, inspect the repository so the documentation matches the actual project.
+Examples:
 
-==================================================
-FINAL TASK
-==================================================
+```bash
+ruff check .
+```
 
-Create/update:
+```bash
+mypy .
+```
 
-README.md
+For frontend:
 
-at the project root.
+```bash
+npm run lint
+```
 
-Make it the definitive developer documentation for JobMatch AI.
+```bash
+npm run build
+```
 
-After creating it, report:
+---
 
-1. README location
-2. Sections included
-3. Actual APIs documented
-4. Installation commands documented
-5. Environment variables documented
-6. Current vs future functionality clearly separated
-7. Any information that could not be verified from the repository
+# 🏗️ Production Build
+
+Build the frontend:
+
+```bash
+npm run build
+```
+
+Preview the production build locally:
+
+```bash
+npm run preview
+```
+
+---
+
+# 🔄 Development Workflow
+
+Recommended development flow:
+
+```text
+1. Clone repository
+        ↓
+2. Configure PostgreSQL
+        ↓
+3. Enable pgvector
+        ↓
+4. Configure backend .env
+        ↓
+5. Run migrations
+        ↓
+6. Start FastAPI
+        ↓
+7. Install frontend dependencies
+        ↓
+8. Configure frontend .env
+        ↓
+9. Start Vite
+        ↓
+10. Open application
+```
+
+---
+
+# 🧪 End-to-End Testing
+
+A complete recommendation flow should look like:
+
+```text
+┌──────────────────────┐
+│ Recruiter Creates Job│
+└──────────┬───────────┘
+           ↓
+┌──────────────────────┐
+│ Job Requirements     │
+│ Skills               │
+│ Salary               │
+│ Experience           │
+│ Location             │
+│ Work Mode            │
+└──────────┬───────────┘
+           ↓
+┌──────────────────────┐
+│ Student Profile      │
+└──────────┬───────────┘
+           ↓
+┌──────────────────────┐
+│ Eligibility Check    │
+└──────────┬───────────┘
+           ↓
+┌──────────────────────┐
+│ Matching Engine      │
+└──────────┬───────────┘
+           ↓
+┌──────────────────────┐
+│ Match Percentage     │
+└──────────┬───────────┘
+           ↓
+┌──────────────────────┐
+│ Student Applies      │
+└──────────┬───────────┘
+           ↓
+┌──────────────────────┐
+│ Match Snapshot Saved │
+└──────────┬───────────┘
+           ↓
+┌──────────────────────┐
+│ Recruiter Reviews    │
+│ Applicant             │
+└──────────────────────┘
+```
+
+---
+
+# 📊 Example Match Result
+
+```text
+╔══════════════════════════════════════╗
+║          AI ENGINEER                 ║
+╠══════════════════════════════════════╣
+║                                      ║
+║          ⭐ 92% MATCH                 ║
+║                                      ║
+║ Skills              91%              ║
+║ Experience         100%              ║
+║ Education           90%              ║
+║ Projects            95%              ║
+║ Location           100%              ║
+║ Work Mode          100%              ║
+║ Salary              80%              ║
+║                                      ║
+║ ✓ Python                             ║
+║ ✓ Machine Learning                   ║
+║ ✓ SQL                                ║
+║                                      ║
+║ ⚠ TensorFlow                        ║
+║ ⚠ Deep Learning                      ║
+║                                      ║
+║ ✅ Eligible                          ║
+╚══════════════════════════════════════╝
+```
+
+> Example values above are illustrative only. The application calculates real scores dynamically.
+
+---
+
+# 🔌 API Documentation
+
+Once the backend is running, open:
+
+```text
+/docs
+```
+
+FastAPI automatically provides interactive Swagger documentation.
+
+You can use it to:
+
+* Explore endpoints
+* Authenticate
+* Create jobs
+* Retrieve jobs
+* Test applications
+* Inspect recommendation responses
+* Validate API schemas
+
+---
+
+# 🔒 Security
+
+JobMatch AI follows application-level security practices including:
+
+* Authentication
+* Authorization
+* Protected routes
+* Tenant/user isolation
+* Input validation
+* Database-backed permissions
+* No exposure of unrelated student profiles
+* No hardcoded production credentials
+
+### Environment Security
+
+Never commit:
+
+```text
+.env
+API keys
+database passwords
+secret keys
+JWT secrets
+production credentials
+```
+
+---
+
+# 🧠 Why Hybrid Matching?
+
+A pure keyword system can miss context.
+
+For example:
+
+```text
+Machine Learning Engineer
+```
+
+and:
+
+```text
+AI/ML Engineer
+```
+
+may be semantically related even when the wording differs.
+
+JobMatch AI combines:
+
+```text
+Semantic Understanding
+        +
+Structured Requirements
+        +
+Eligibility Rules
+        +
+Weighted Scoring
+```
+
+This provides better matching while keeping the final result understandable.
+
+---
+
+# 🏆 Advantages
+
+### For Students
+
+✅ Personalized job recommendations
+✅ Transparent match percentages
+✅ Matched skills
+✅ Missing skills
+✅ Eligibility insights
+✅ Complete job information
+✅ Better understanding of skill gaps
+
+### For Recruiters
+
+✅ Applicant match percentage
+✅ Candidate-job comparison
+✅ Matched skills
+✅ Missing skills
+✅ Eligibility visibility
+✅ Historical application match snapshot
+✅ Faster candidate screening
+
+---
+
+# 🧪 Quality Assurance
+
+The project includes validation for:
+
+```text
+✓ Skill matching
+✓ Skill normalization
+✓ Experience matching
+✓ Education matching
+✓ Project relevance
+✓ Role relevance
+✓ Location matching
+✓ Work-mode matching
+✓ Salary compatibility
+✓ Eligibility
+✓ Match percentage
+✓ Recommendation ranking
+✓ Application snapshots
+✓ Authentication
+✓ Authorization
+✓ Tenant isolation
+✓ API behavior
+✓ Production frontend build
+```
+
+---
+
+# 🚀 Future Improvements
+
+Potential future enhancements:
+
+* 🤖 Advanced personalized ranking
+* 📈 Recommendation feedback loops
+* 📊 Recruiter analytics
+* 🔔 Job recommendation notifications
+* 🧠 Improved semantic models
+* 🗺️ Geographic distance-based matching
+* 📱 Mobile application
+* 📧 Personalized job alerts
+* 📚 Skill-gap learning recommendations
+* 📈 Recommendation performance analytics
+
+---
+
+# 🤝 Contributing
+
+Contributions are welcome.
+
+### 1. Fork the repository
+
+```bash
+git fork
+```
+
+### 2. Create a feature branch
+
+```bash
+git checkout -b feature/your-feature
+```
+
+### 3. Make your changes
+
+Follow the existing project architecture.
+
+### 4. Run tests
+
+```bash
+pytest
+```
+
+and:
+
+```bash
+npm run build
+```
+
+### 5. Commit
+
+```bash
+git add .
+git commit -m "feat: add your feature"
+```
+
+### 6. Push
+
+```bash
+git push origin feature/your-feature
+```
+
+### 7. Open a Pull Request
+
+---
+
+# 🐛 Troubleshooting
+
+## PostgreSQL connection error
+
+Check:
+
+```text
+PostgreSQL is running
+DATABASE_URL is correct
+Database exists
+Username/password are correct
+Port is correct
+```
+
+Default PostgreSQL port:
+
+```text
+5432
+```
+
+---
+
+## pgvector error
+
+Ensure the extension is installed and enabled:
+
+```sql
+CREATE EXTENSION IF NOT EXISTS vector;
+```
+
+---
+
+## Backend won't start
+
+Try:
+
+```bash
+pip install -r requirements.txt
+```
+
+Then:
+
+```bash
+uvicorn app.main:app --reload
+```
+
+Check the terminal traceback for the exact configuration error.
+
+---
+
+## Frontend won't start
+
+Try:
+
+```bash
+rm -rf node_modules
+npm install
+npm run dev
+```
+
+On Windows PowerShell, remove `node_modules` using:
+
+```powershell
+Remove-Item -Recurse -Force node_modules
+```
+
+Then:
+
+```bash
+npm install
+npm run dev
+```
+
+---
+
+## API connection problem
+
+Check the frontend environment configuration:
+
+```env
+VITE_API_BASE_URL=http://localhost:8000
+```
+
+Also confirm that FastAPI is running.
+
+---
+
+# 📜 License
+
+Add your preferred license here.
+
+Example:
+
+```text
+MIT License
+```
+
+---
+
+# 👨‍💻 Author
+
+**Pritam**
+
+Built as an AI-powered recruitment and job-matching platform.
+
+---
+
+# ⭐ Support
+
+If you find this project useful:
+
+⭐ Star the repository
+🍴 Fork it
+🐛 Report issues
+💡 Suggest improvements
+🤝 Contribute
+
+---
+
+<p align="center">
+
+### 🚀 JobMatch AI
+
+**Match smarter. Hire better. Build better careers.**
+
+</p>
