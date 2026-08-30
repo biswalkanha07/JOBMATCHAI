@@ -1,31 +1,35 @@
 import React, { useState, useEffect } from 'react';
 import { Card } from '../../components/Card';
-import { studentApi, type Application } from '../../api/student';
+import { studentApi, type Application, type StudentProfile } from '../../api/student';
 import { useAuth } from '../../context/AuthContext';
 import './Dashboard.css';
 
 export const StudentDashboard: React.FC = () => {
   const { user } = useAuth();
   const [applications, setApplications] = useState<Application[]>([]);
+  const [profile, setProfile] = useState<StudentProfile | null>(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const fetchApps = async () => {
+    const fetchData = async () => {
       try {
-        const apps = await studentApi.getApplications();
+        const [apps, prof] = await Promise.all([
+          studentApi.getApplications(),
+          studentApi.getProfile()
+        ]);
         setApplications(apps);
+        setProfile(prof);
       } catch (err) {
-        console.error("Failed to fetch applications", err);
+        console.error("Failed to fetch data", err);
       } finally {
         setLoading(false);
       }
     };
-    fetchApps();
+    fetchData();
   }, []);
 
   const pendingApps = applications.filter(a => a.status === 'APPLIED' || a.status === 'UNDER_REVIEW').length;
   const shortlistedApps = applications.filter(a => a.status === 'SHORTLISTED' || a.status === 'INTERVIEW').length;
-  const rejectedApps = applications.filter(a => a.status === 'REJECTED').length;
 
   return (
     <div className="dashboard-container">
@@ -36,47 +40,23 @@ export const StudentDashboard: React.FC = () => {
         </div>
       </div>
 
-      <div className="dashboard-grid">
-        {/* Profile Completion Card */}
-        <Card className="profile-card">
-          <div className="profile-header">
-            <h3>Profile Completion</h3>
-            <span className="completion-text">40%</span>
-          </div>
-          <div className="progress-bar-bg">
-            <div className="progress-bar-fill" style={{ width: '40%' }}></div>
-          </div>
-          <ul className="completion-list">
-            <li className="completed">✓ Personal Information</li>
-            <li className="warning">⚠ Add Resume</li>
-            <li className="warning">⚠ Add Skills</li>
-            <li className="warning">⚠ Add Education</li>
-          </ul>
+      <div className="analytics-grid">
+        <Card className="stat-card">
+          <h4>Profile Completion</h4>
+          <div className="stat-value">{profile?.completion_percentage || 0}%</div>
         </Card>
-
-        {/* Analytics Cards */}
-        <div className="analytics-grid">
-          <Card className="stat-card">
-            <h4>Jobs Applied</h4>
-            <div className="stat-value">{applications.length}</div>
-          </Card>
-          <Card className="stat-card">
-            <h4>Pending Applications</h4>
-            <div className="stat-value">{pendingApps}</div>
-          </Card>
-          <Card className="stat-card">
-            <h4>Shortlisted</h4>
-            <div className="stat-value">{shortlistedApps}</div>
-          </Card>
-          <Card className="stat-card">
-            <h4>Rejected</h4>
-            <div className="stat-value">{rejectedApps}</div>
-          </Card>
-          <Card className="stat-card">
-            <h4>Profile Match Strength</h4>
-            <div className="stat-value text-primary">Pending ML</div>
-          </Card>
-        </div>
+        <Card className="stat-card">
+          <h4>Jobs Applied</h4>
+          <div className="stat-value">{applications.length}</div>
+        </Card>
+        <Card className="stat-card">
+          <h4>Pending Applications</h4>
+          <div className="stat-value">{pendingApps}</div>
+        </Card>
+        <Card className="stat-card">
+          <h4>Shortlisted</h4>
+          <div className="stat-value">{shortlistedApps}</div>
+        </Card>
       </div>
 
       {/* Recent Applications */}
@@ -90,15 +70,17 @@ export const StudentDashboard: React.FC = () => {
               <table className="data-table">
                 <thead>
                   <tr>
-                    <th>Job ID</th>
+                    <th>Job</th>
+                    <th>Location</th>
                     <th>Applied Date</th>
                     <th>Status</th>
                   </tr>
                 </thead>
                 <tbody>
-                  {applications.map(app => (
+                  {applications.slice(0, 5).map(app => (
                     <tr key={app.id}>
-                      <td>#{app.job_id}</td>
+                      <td><strong>{app.job?.title || `Job #${app.job_id}`}</strong></td>
+                      <td>{app.job?.location || 'Remote'}</td>
                       <td>{new Date(app.applied_at).toLocaleDateString()}</td>
                       <td><span className={`status-badge status-${app.status.toLowerCase()}`}>{app.status}</span></td>
                     </tr>

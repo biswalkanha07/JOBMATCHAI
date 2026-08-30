@@ -41,7 +41,8 @@ export const Login: React.FC = () => {
   return (
     <div className="auth-container">
       <Card className="auth-card">
-        <div className="auth-header">
+        <div className="auth-header" style={{ textAlign: 'center' }}>
+          <img src="/logo.png" alt="JobMatch AI Logo" style={{ height: '80px', marginBottom: '16px' }} />
           <h2>Welcome Back</h2>
           <p>Login to your JobMatch AI account</p>
         </div>

@@ -1,7 +1,7 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from app.core.config import settings
-from app.api.v1.routes import auth, public_jobs, students, recruiter_jobs
+from app.api.v1.routes import auth, public_jobs, students, recruiter_jobs, recruiters
 
 app = FastAPI(
     title=settings.PROJECT_NAME,
@@ -22,6 +22,7 @@ app.add_middleware(
 app.include_router(auth.router, prefix=f"{settings.API_V1_STR}/auth", tags=["auth"])
 app.include_router(public_jobs.router, prefix=f"{settings.API_V1_STR}/public/jobs", tags=["public"])
 app.include_router(students.router, prefix=f"{settings.API_V1_STR}/students", tags=["students"])
+app.include_router(recruiters.router, prefix=f"{settings.API_V1_STR}/recruiters", tags=["recruiters"])
 app.include_router(recruiter_jobs.router, prefix=f"{settings.API_V1_STR}/recruiter/jobs", tags=["recruiter_jobs"])
 
 from fastapi import Depends, HTTPException

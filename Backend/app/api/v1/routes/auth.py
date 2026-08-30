@@ -31,7 +31,7 @@ def register_student(data: StudentRegistration, db: Session = Depends(get_db)):
         first_name=data.first_name,
         last_name=data.last_name,
         phone=data.phone,
-        preferred_job_role=data.preferred_job_role,
+        preferred_job_roles=data.preferred_job_roles,
         location=data.location
     )
     db.add(profile)

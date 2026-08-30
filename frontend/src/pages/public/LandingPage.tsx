@@ -28,7 +28,10 @@ export const LandingPage: React.FC = () => {
     <div className="landing-page">
       <header className="landing-nav">
         <div className="container nav-content">
-          <div className="logo">JobMatch AI</div>
+          <div className="logo" style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+            <img src="/logo.png" alt="JobMatch AI Logo" style={{ height: '64px' }} />
+            JobMatch AI
+          </div>
           <nav className="nav-links">
             <a href="#how-it-works">How It Works</a>
             <a href="#features">Features</a>

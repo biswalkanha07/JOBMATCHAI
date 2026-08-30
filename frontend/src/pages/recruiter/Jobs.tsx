@@ -54,9 +54,14 @@ export const RecruiterJobs: React.FC = () => {
                     <td>{job.location || 'Remote'}</td>
                     <td><span className={`status-badge status-${job.status.toLowerCase()}`}>{job.status}</span></td>
                     <td>
-                      <Button variant="outline" size="sm" onClick={() => navigate(`/recruiter/candidates?jobId=${job.id}`)}>
-                        View Candidates
-                      </Button>
+                      <div style={{ display: 'flex', gap: '0.5rem' }}>
+                        <Button variant="outline" size="sm" onClick={() => navigate(`/recruiter/jobs/${job.id}/edit`)}>
+                          Edit
+                        </Button>
+                        <Button variant="outline" size="sm" onClick={() => navigate(`/recruiter/candidates?jobId=${job.id}`)}>
+                          View Candidates
+                        </Button>
+                      </div>
                     </td>
                   </tr>
                 ))}

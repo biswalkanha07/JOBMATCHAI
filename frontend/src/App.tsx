@@ -56,6 +56,7 @@ function App() {
             <Route path="dashboard" element={<RecruiterDashboard />} />
             <Route path="jobs" element={<RecruiterJobs />} />
             <Route path="jobs/create" element={<RecruiterCreateJob />} />
+            <Route path="jobs/:id/edit" element={<RecruiterCreateJob />} />
             <Route path="candidates" element={<RecruiterMatchProfiles />} />
             <Route path="candidates/:id" element={<RecruiterCandidateProfile />} />
             <Route path="settings" element={<RecruiterSettings />} />

@@ -10,3 +10,7 @@ pyjwt
 passlib[bcrypt]
 pytest
 httpx
+python-multipart
+
+pgvector
+sentence-transformers

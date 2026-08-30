@@ -19,7 +19,7 @@ class StudentRegistration(BaseModel):
     first_name: str
     last_name: str
     phone: Optional[str] = None
-    preferred_job_role: Optional[str] = None
+    preferred_job_roles: Optional[list[str]] = None
     location: Optional[str] = None
 
 class RecruiterRegistration(BaseModel):

@@ -13,7 +13,13 @@ import './StudentLayout.css';
 export const StudentLayout: React.FC = () => {
   const location = useLocation();
   const navigate = useNavigate();
-  const { logout } = useAuth();
+  const { user, logout } = useAuth();
+  
+  const firstName = user?.student_profile?.first_name || 'Student';
+  const lastName = user?.student_profile?.last_name || '';
+  const fullName = `${firstName} ${lastName}`.trim();
+  const initials = `${firstName[0] || ''}${lastName[0] || ''}`.toUpperCase() || 'S';
+  const email = user?.email || 'student@example.com';
 
   const handleLogout = () => {
     logout();
@@ -25,7 +31,10 @@ export const StudentLayout: React.FC = () => {
       {/* Sidebar */}
       <aside className="sidebar">
         <div className="sidebar-header">
-          <h2>JobMatch AI</h2>
+          <h2 style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+            <img src="/logo.png" alt="JobMatch AI Logo" style={{ height: '48px' }} />
+            JobMatch AI
+          </h2>
           <span className="role-badge">Student</span>
         </div>
 
@@ -73,10 +82,10 @@ export const StudentLayout: React.FC = () => {
 
         <div className="sidebar-footer">
           <div className="user-info">
-            <div className="avatar">PK</div>
+            <div className="avatar">{initials}</div>
             <div className="user-details">
-              <span className="user-name">Pritam Kumar</span>
-              <span className="user-email">pritam@example.com</span>
+              <span className="user-name">{fullName}</span>
+              <span className="user-email">{email}</span>
             </div>
           </div>
           <button className="logout-btn" onClick={handleLogout}>
@@ -92,7 +101,7 @@ export const StudentLayout: React.FC = () => {
             {/* Search or breadcrumbs can go here */}
           </div>
           <div className="topbar-actions">
-            <div className="avatar small">PK</div>
+            <div className="avatar small">{initials}</div>
           </div>
         </header>
         

@@ -13,7 +13,13 @@ import './RecruiterLayout.css';
 export const RecruiterLayout: React.FC = () => {
   const location = useLocation();
   const navigate = useNavigate();
-  const { logout } = useAuth();
+  const { user, logout } = useAuth();
+
+  const firstName = user?.recruiter_profile?.first_name || 'Recruiter';
+  const lastName = user?.recruiter_profile?.last_name || '';
+  const fullName = `${firstName} ${lastName}`.trim();
+  const initials = `${firstName[0] || ''}${lastName[0] || ''}`.toUpperCase() || 'R';
+  const companyName = user?.recruiter_profile?.tenant?.company?.name || 'Company';
 
   const handleLogout = () => {
     logout();
@@ -25,7 +31,10 @@ export const RecruiterLayout: React.FC = () => {
       {/* Sidebar */}
       <aside className="sidebar">
         <div className="sidebar-header">
-          <h2>JobMatch AI</h2>
+          <h2 style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+            <img src="/logo.png" alt="JobMatch AI Logo" style={{ height: '48px' }} />
+            JobMatch AI
+          </h2>
           <span className="role-badge">Recruiter</span>
         </div>
 
@@ -73,10 +82,10 @@ export const RecruiterLayout: React.FC = () => {
 
         <div className="sidebar-footer">
           <div className="user-info">
-            <div className="avatar">AJ</div>
+            <div className="avatar">{initials}</div>
             <div className="user-details">
-              <span className="user-name">Alex Johnson</span>
-              <span className="user-email">Tech Solutions Pvt. Ltd.</span>
+              <span className="user-name">{fullName}</span>
+              <span className="user-email">{companyName}</span>
             </div>
           </div>
           <button className="logout-btn" onClick={handleLogout}>
@@ -92,7 +101,7 @@ export const RecruiterLayout: React.FC = () => {
             {/* Search */}
           </div>
           <div className="topbar-actions">
-            <div className="avatar small">AJ</div>
+            <div className="avatar small">{initials}</div>
           </div>
         </header>
         
